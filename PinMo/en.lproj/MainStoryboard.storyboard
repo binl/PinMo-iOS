@@ -1,82 +1,125 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2837" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1921"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier First View Controller - First-->
-        <scene sceneID="11">
+        <!--Navigation Controller-->
+        <scene sceneID="uzI-PR-ni8">
             <objects>
-                <viewController title="First" id="2" customClass="PMFirstViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="16">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <navigationController definesPresentationContext="YES" id="MMX-Tc-rTq" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="eAI-Fh-Prz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iJX-ID-yyo">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="AEt-Ev-JMJ" kind="relationship" relationship="rootViewController" id="wre-dU-1Ta"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6v6-vN-ZVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="491" y="-978"/>
+        </scene>
+        <!--Explore View Controller-->
+        <scene sceneID="3Od-v7-ePC">
+            <objects>
+                <viewController id="AEt-Ev-JMJ" customClass="PMExploreViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m9D-lu-cwV">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="First View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="20">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="21">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="Ikv-jk-tyi"/>
-                                </constraints>
-                                <string key="text">Loaded by the first view controller — an instance of PMFirstViewController — specified in the app delegate.</string>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWZ-kj-PZq">
+                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ExploreListCell" rowHeight="200" id="kTa-1g-fcj" customClass="PMExploreListCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="DZI-y0-CfF"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="#Golden Gate Bridge" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZg-Co-jE5">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="219" id="KFn-Fc-McU"/>
+                                                        <constraint firstAttribute="height" constant="22" id="TCN-DY-Cog"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <scrollView clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lfG-Xn-PeY"/>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="lfG-Xn-PeY" firstAttribute="leading" secondItem="kTa-1g-fcj" secondAttribute="leading" constant="35" id="7hn-3N-b1N"/>
+                                            <constraint firstAttribute="bottom" secondItem="lfG-Xn-PeY" secondAttribute="bottom" constant="7" id="9i2-Jx-U95"/>
+                                            <constraint firstItem="DZI-y0-CfF" firstAttribute="centerX" secondItem="lfG-Xn-PeY" secondAttribute="centerX" type="default" id="Il4-1y-97F"/>
+                                            <constraint firstItem="DZI-y0-CfF" firstAttribute="bottom" secondItem="kTa-1g-fcj" secondAttribute="bottom" type="default" id="LHG-qa-2Zs"/>
+                                            <constraint firstItem="DZI-y0-CfF" firstAttribute="leading" secondItem="kTa-1g-fcj" secondAttribute="leading" type="default" id="RW8-jT-7IM"/>
+                                            <constraint firstItem="DZI-y0-CfF" firstAttribute="top" secondItem="kTa-1g-fcj" secondAttribute="top" type="default" id="Vdj-8a-upA"/>
+                                            <constraint firstItem="lfG-Xn-PeY" firstAttribute="top" secondItem="kTa-1g-fcj" secondAttribute="top" constant="33" id="fTV-dd-BhX"/>
+                                            <constraint firstItem="UZg-Co-jE5" firstAttribute="leading" secondItem="kTa-1g-fcj" secondAttribute="leading" constant="20" type="default" id="fc4-sn-7Kn"/>
+                                            <constraint firstItem="UZg-Co-jE5" firstAttribute="top" secondItem="kTa-1g-fcj" secondAttribute="top" constant="12" id="lu2-0Q-qA8"/>
+                                            <constraint firstItem="DZI-y0-CfF" firstAttribute="trailing" secondItem="kTa-1g-fcj" secondAttribute="trailing" type="default" id="sYQ-DX-cXd"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="lblLocName" destination="UZg-Co-jE5" id="qXa-aG-iB5"/>
+                                            <outlet property="scrlImages" destination="lfG-Xn-PeY" id="kod-gB-1cA"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="AEt-Ev-JMJ" id="jcw-m8-gn5"/>
+                                    <outlet property="delegate" destination="AEt-Ev-JMJ" id="Mjg-KG-crx"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="21" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="QBg-X6-fBV"/>
-                            <constraint firstAttribute="trailing" secondItem="20" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Qxj-1L-2Yh"/>
-                            <constraint firstItem="20" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Ty9-wx-CyI"/>
-                            <constraint firstItem="21" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Zmm-k2-2L7"/>
-                            <constraint firstItem="21" firstAttribute="top" secondItem="20" secondAttribute="bottom" constant="40" type="user" id="jX0-Wi-kmb"/>
-                            <constraint firstAttribute="centerY" secondItem="21" secondAttribute="centerY" type="user" id="yWk-L2-m9F"/>
+                            <constraint firstItem="zWZ-kj-PZq" firstAttribute="trailing" secondItem="m9D-lu-cwV" secondAttribute="trailing" type="default" id="BQn-mZ-gly"/>
+                            <constraint firstItem="zWZ-kj-PZq" firstAttribute="bottom" secondItem="m9D-lu-cwV" secondAttribute="bottom" type="default" id="KWr-vc-n7a"/>
+                            <constraint firstItem="zWZ-kj-PZq" firstAttribute="top" secondItem="m9D-lu-cwV" secondAttribute="top" type="default" id="yUS-AS-HNX"/>
+                            <constraint firstItem="zWZ-kj-PZq" firstAttribute="leading" secondItem="m9D-lu-cwV" secondAttribute="leading" type="default" id="zsC-DK-6Q6"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="7"/>
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="wcJ-K0-2eI"/>
+                    <navigationItem key="navigationItem" id="uw3-mY-p1e"/>
+                    <connections>
+                        <outlet property="tblExploreList" destination="zWZ-kj-PZq" id="LQS-Vv-WN2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lpi-MW-myL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954" y="-978"/>
+        </scene>
+        <!--New Trip View Controller - New Trip-->
+        <scene sceneID="11">
+            <objects>
+                <viewController title="New Trip" id="2" customClass="PMNewTripViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="16">
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="New" id="7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="-138"/>
+            <point key="canvasLocation" x="653" y="-162"/>
         </scene>
-        <!--class Prefix:identifier Second View Controller - Second-->
+        <!--Mine View Controller - My Trips-->
         <scene sceneID="13">
             <objects>
-                <viewController title="Second" id="3" customClass="PMSecondViewController" sceneMemberID="viewController">
+                <viewController title="My Trips" id="3" customClass="PMMineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="17">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="22">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="cQR-IW-sY8"/>
-                                </constraints>
-                                <string key="text">Loaded by the second view controller — an instance of PMSecondViewController — specified in the app delegate.</string>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="22" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="0q6-IA-e8m"/>
-                            <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="fR4-wH-Ih7"/>
-                            <constraint firstItem="23" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fzb-YA-SeR"/>
-                            <constraint firstAttribute="centerY" secondItem="23" secondAttribute="centerY" type="user" id="llH-eD-iPS"/>
-                            <constraint firstAttribute="trailing" secondItem="22" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="pc3-9Y-W42"/>
-                            <constraint firstItem="23" firstAttribute="top" secondItem="22" secondAttribute="bottom" constant="40" type="user" id="yUx-Ee-KEk"/>
-                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="6"/>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,22 +136,46 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="MMX-Tc-rTq" kind="relationship" relationship="viewControllers" id="Qw6-Tx-Ui7"/>
                         <segue destination="2" kind="relationship" relationship="viewControllers" id="26"/>
                         <segue destination="3" kind="relationship" relationship="viewControllers" id="27"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="180"/>
+            <point key="canvasLocation" x="-46" y="-162"/>
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="16" height="16"/>
-        <image name="second" width="16" height="16"/>
+        <image name="cellBg.png" width="543" height="160"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PMExploreListCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PMExploreListCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblLocName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrlImages" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="PMExploreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PMExploreViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tblExploreList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="PMMineViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PMMineViewController.h"/>
+        </class>
+        <class className="PMNewTripViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PMNewTripViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

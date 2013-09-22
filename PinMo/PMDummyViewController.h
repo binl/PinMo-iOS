@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PMFirstViewController : UIViewController
+@interface PMDummyViewController : UIViewController
+
+@property (nonatomic, strong) IBOutlet UIImageView *img;
 
 @end

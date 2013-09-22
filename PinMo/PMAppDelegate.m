@@ -13,6 +13,30 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    UIImage *navBackgroundImage = [UIImage imageNamed:@"navBar.png"];
+    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8], UITextAttributeTextColor,
+                                                           [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8],UITextAttributeTextShadowColor,
+                                                           //[NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
+                                                           [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20.0], UITextAttributeFont, nil]];
+    UIImage *backButtonImage = [[UIImage imageNamed:@"navBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor blueColor], UITextAttributeTextColor,
+                                                          [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8],UITextAttributeTextShadowColor,
+                                                          //[NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
+                                                          [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:17.0], UITextAttributeFont, nil]
+                                                forState:UIControlStateNormal];
+    
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+//
+//    UIImage* tabBarBackground = [UIImage imageNamed:@"tabbar.png"];
+//    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
+//    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selected.png"]];
+//    
     return YES;
 }
 							

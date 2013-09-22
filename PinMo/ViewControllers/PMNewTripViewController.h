@@ -1,5 +1,5 @@
 //
-//  PMSecondViewController.h
+//  PMNewTripViewController.h
 //  PinMo
 //
 //  Created by Bin Liu on 13-9-21.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PMSecondViewController : UIViewController
+@interface PMNewTripViewController : UIViewController
 
 @end
