@@ -7,7 +7,7 @@
 //
 
 #import "PMAppDelegate.h"
-
+#import "PMUserGeoManager.h"
 @implementation PMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -20,7 +20,7 @@
                                                            [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8], UITextAttributeTextColor,
                                                            [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8],UITextAttributeTextShadowColor,
                                                            //[NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
-                                                           [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20.0], UITextAttributeFont, nil]];
+                                                           [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], UITextAttributeFont, nil]];
     UIImage *backButtonImage = [[UIImage imageNamed:@"navBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UIBarButtonItem appearance] setBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -32,14 +32,33 @@
                                                 forState:UIControlStateNormal];
     
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-//
-//    UIImage* tabBarBackground = [UIImage imageNamed:@"tabbar.png"];
-//    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
-//    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selected.png"]];
-//    
+
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    UITabBar *tabBar = tabBarController.tabBar;
+    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
+    
+    tabBarItem1.title = @"";
+    tabBarItem2.title = @"";
+    tabBarItem3.title = @"";
+    
+    [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"explore_icon_selected.png"]
+              withFinishedUnselectedImage:[UIImage imageNamed:@"explore_icon.png"]];
+    [tabBarItem2 setFinishedSelectedImage:[UIImage imageNamed:@"track_icon_selected.png"]
+              withFinishedUnselectedImage:[UIImage imageNamed:@"track_icon.png"]];
+    [tabBarItem3 setFinishedSelectedImage:[UIImage imageNamed:@"history_icon.png"]
+              withFinishedUnselectedImage:[UIImage imageNamed:@"history_icon.png"]];
+    
+    UIImage* tabBarBackground = [UIImage imageNamed:@"tabbar.png"];
+    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
+    
+    
+    [PMUserGeoManager sharedInstance];
+    
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

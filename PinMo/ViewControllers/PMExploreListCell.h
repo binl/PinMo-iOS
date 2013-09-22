@@ -14,7 +14,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblLocName;
 
 @property (strong, nonatomic) NSMutableArray *arrImages;
+@property (strong, nonatomic) NSDictionary *dicInfo;
 
-- (void)initCellWithLocName:(NSString *)name;
 
+- (void)initCellWithLocInfo:(NSDictionary *)info;
+- (IBAction)gotoMap:(id)sender;
 @end

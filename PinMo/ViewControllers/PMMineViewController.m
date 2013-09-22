@@ -8,6 +8,8 @@
 
 #import "PMMineViewController.h"
 
+#import "PMTutorialViewController.h"
+
 @interface PMMineViewController ()
 
 @end

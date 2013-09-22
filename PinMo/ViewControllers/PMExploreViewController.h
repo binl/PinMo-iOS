@@ -13,4 +13,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tblExploreList;
 
+@property (strong, nonatomic) NSMutableArray *arrNearBySpots;
+
+-(IBAction)switchToMapView:(id)sender;
+
 @end
