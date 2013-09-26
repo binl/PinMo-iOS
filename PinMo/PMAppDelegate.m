@@ -21,13 +21,14 @@
                                                            [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8],UITextAttributeTextShadowColor,
                                                            //[NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
                                                            [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], UITextAttributeFont, nil]];
-    UIImage *backButtonImage = [[UIImage imageNamed:@"navBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearance] setBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    UIImage *barButtonImage = [[UIImage imageNamed:@"navBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor blueColor], UITextAttributeTextColor,
+                                                          [UIColor colorWithRed:200.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:0.8], UITextAttributeTextColor,
                                                           [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8],UITextAttributeTextShadowColor,
-                                                          //[NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
                                                           [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:17.0], UITextAttributeFont, nil]
                                                 forState:UIControlStateNormal];
     

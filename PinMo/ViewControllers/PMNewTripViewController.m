@@ -9,6 +9,7 @@
 #import "PMNewTripViewController.h"
 
 #import "PMUserGeoManager.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define CONTENT_WIDTH 260
 #define PAGE_PADDING 10
@@ -72,11 +73,21 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     if (IS_RECORDING) {
-        [self animateView:self.radarAnime WithDelay:0];
-        [self animateView:self.radarAnime2 WithDelay:1.0];
-        [self animateView:self.radarAnime3 WithDelay:2.0];
+        [self performSelector:@selector(restartAnime) withObject:nil afterDelay:1];
     }
 }
+
+- (void)restartAnime {
+    [self animateView:self.radarAnime WithDelay:0];
+    [self animateView:self.radarAnime2 WithDelay:1.0];
+    [self animateView:self.radarAnime3 WithDelay:2.0];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+}
+
+
 
 - (void)loadScrollViewWithPage:(NSUInteger)page
 {
@@ -189,7 +200,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:3
                               delay:delay
-                            options:UIViewAnimationOptionTransitionNone
+                            options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
              view.frame = CGRectMake(0, 66, 320, 320);
              view.alpha = 0;
@@ -197,7 +208,7 @@
                          completion:^(BOOL finished) {
                              view.frame = CGRectMake(70, 136, 180, 180);
                              view.alpha = 1;
-                             if(IS_RECORDING) {
+                             if(IS_RECORDING && finished) {
                                  [self animateView:view WithDelay:0];
                              }
                          }];

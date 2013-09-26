@@ -58,11 +58,10 @@
         if ([prevLocation distanceFromLocation:newLocation] > 10) {
             prevLocation = newLocation;
         }
+        else
+            return;
     }
     
-    if (prevLocation == NULL) {
-        return;
-    }
     NSDictionary *cood = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSNumber numberWithDouble:prevLocation.coordinate.latitude], @"lat",
                           [NSNumber numberWithDouble:prevLocation.coordinate.longitude], @"longt",

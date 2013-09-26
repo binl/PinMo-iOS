@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface PMExploreListCell : UITableViewCell
-
+<UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrlImages;
 @property (strong, nonatomic) IBOutlet UILabel *lblLocName;
 
 @property (strong, nonatomic) NSMutableArray *arrImages;
 @property (strong, nonatomic) NSDictionary *dicInfo;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgXOLA;
 
 - (void)initCellWithLocInfo:(NSDictionary *)info;
 - (IBAction)gotoMap:(id)sender;

@@ -34,7 +34,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     CLLocationCoordinate2D zoomLocation = [[[PMUserGeoManager sharedInstance] locCurrent] coordinate];
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 5*METERS_PER_MILE, 5*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 100*METERS_PER_MILE, 100*METERS_PER_MILE);
     
     NSLog(@"viewRegion: %f, %f", viewRegion.center.latitude,viewRegion.center.longitude);
     [self.map setRegion:viewRegion animated:YES];
@@ -70,6 +70,9 @@
         
         MKAnnotationView *annotationView = (MKAnnotationView *) [self.map dequeueReusableAnnotationViewWithIdentifier:identifier];
         if (annotationView == nil) {
+            UILabel *annotationNum = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 30, 30)];
+            annotationNum.text = @"10";
+            [annotationView addSubview:annotationNum];
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
             annotationView.enabled = YES;
             annotationView.canShowCallout = YES;

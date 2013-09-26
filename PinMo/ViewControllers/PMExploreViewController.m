@@ -11,8 +11,13 @@
 #import "PMExploreListCell.h"
 
 #import "PMMapExploreViewController.h"
+#import "PMExpDetailViewController.h"
 
-@interface PMExploreViewController ()
+#import "AFAppDotNetAPIClient.h"
+
+#import <QuartzCore/QuartzCore.h>
+@interface PMExploreViewController () {
+}
 
 @end
 
@@ -28,39 +33,77 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Explore";
 	// Do any additional setup after loading the view.
     
-    self.arrNearBySpots = [NSMutableArray array];
-
-    CLLocation *location = [[CLLocation alloc]initWithLatitude:37.810301 longitude:-122.418017];
-    NSDictionary *fiswf = [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"FishermansWharf", @"tag",
-                             location, @"location", nil];
-    
-    location = [[CLLocation alloc]initWithLatitude:37.802104 longitude:-122.418929];
-    NSDictionary *lombard = [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"LombardStreet", @"tag",
-                             location, @"location", nil];
-
-    location = [[CLLocation alloc]initWithLatitude:37.832582 longitude:-122.480062];
-    NSDictionary *ggb = [NSDictionary dictionaryWithObjectsAndKeys:
+    [[AFAppDotNetAPIClient sharedClient] getPath:@"experiences" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        NSArray *locationsFromResponse = [JSON valueForKeyPath:@"data"];
+        
+        //NSLog(@"Experiences: %@", [locationsFromResponse description]);
+        
+        CLLocation *location = [[CLLocation alloc]initWithLatitude:37.810301 longitude:-122.418017];
+        NSDictionary *fiswf = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"FishermansWharf", @"tag",
+                               location, @"location", nil];
+        
+        location = [[CLLocation alloc]initWithLatitude:37.802104 longitude:-122.418929];
+        NSDictionary *lombard = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"LombardStreet", @"tag",
+                                 location, @"location", nil];
+        
+        location = [[CLLocation alloc]initWithLatitude:37.832582 longitude:-122.480062];
+        NSDictionary *ggb = [NSDictionary dictionaryWithObjectsAndKeys:
                              @"GoldenGateBridge", @"tag",
                              location, @"location", nil];
+        
+        location = [[CLLocation alloc]initWithLatitude:37.795458 longitude:-122.393492];
+        NSDictionary *fb = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"FerryBuilding", @"tag",
+                            location, @"location", nil];
+        
+        [self.arrNearBySpots addObject:fiswf];
+        [self.arrNearBySpots addObject:lombard];
+        [self.arrNearBySpots addObject:ggb];
+        [self.arrNearBySpots addObject:fb];
+        
+        for (NSDictionary *exp in locationsFromResponse) {
+            if ([[exp objectForKey:@"name"] isEqualToString:@"Survival Skills Training in the Heart of the Santa Cruz Mountains"]) {
+                continue;
+            }
+            
+            NSLog(@"Venue: %@", [exp description]);
+            CLLocationDegrees lat = [[[exp objectForKey:@"geo"] objectForKey:@"lat"] doubleValue];
+            CLLocationDegrees lng = [[[exp objectForKey:@"geo"] objectForKey:@"lng"] doubleValue];
+            CLLocation *expGeo = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+            
+            if ([expGeo distanceFromLocation:[[PMUserGeoManager sharedInstance] locCurrent]] < 200000) {
+                
+                NSDictionary *newVenue = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [exp objectForKey:@"name"], @"tag",
+                                          expGeo, @"location",
+                                          @"YES", @"XOLA",
+                                          [exp objectForKey:@"price"], @"price",
+                                          [exp objectForKey:@"category"], @"category",
+                                          [exp objectForKey:@"desc"], @"desc",
+                                          [exp objectForKey:@"medias"], @"photos",
+                                          nil];
+                
+                [self.arrNearBySpots addObject:newVenue];
+            }
+        }
+
+        [self.tblExploreList reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
     
-    location = [[CLLocation alloc]initWithLatitude:37.795458 longitude:-122.393492];
-    NSDictionary *fb = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"FerryBuilding", @"tag",
-                         location, @"location", nil];
-    
-    [self.arrNearBySpots addObject:fiswf];
-    [self.arrNearBySpots addObject:lombard];
-    [self.arrNearBySpots addObject:ggb];
-    [self.arrNearBySpots addObject:fb];
-    
+    self.arrNearBySpots = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +129,17 @@
     [cell initCellWithLocInfo:[self.arrNearBySpots objectAtIndex:indexPath.row]];
      
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic = [self.arrNearBySpots objectAtIndex:indexPath.row];
+    if (![dic objectForKey:@"XOLA"]) {
+        return;
+    }
+    PMExpDetailViewController *detailView = [[self storyboard] instantiateViewControllerWithIdentifier:@"PMExpDetailViewController"];
+    
+    detailView.dicInfo = dic;
+    [self.navigationController pushViewController:detailView animated:YES];
 }
 
 #pragma mark - Actions

@@ -16,6 +16,7 @@ static NSInteger kDelta = 0;
 
 @interface PMExploreListCell () {
     NSString *_strSpotName;
+    NSUInteger numberPages;
 }
 
 @end
@@ -44,7 +45,17 @@ static NSInteger kDelta = 0;
     _strSpotName = [info objectForKey:@"tag"];
     self.lblLocName.text = [NSString stringWithFormat:@"#%@", _strSpotName];
     
-    NSUInteger numberPages = 3;
+    if ([info objectForKey:@"XOLA"]) {
+        [self.imgXOLA setHidden:NO];
+        numberPages = [[info objectForKey:@"photos"] count];
+        if (numberPages > 2) {
+            numberPages = 2;
+        }
+    }
+    else {
+        [self.imgXOLA setHidden:YES];
+        numberPages = 3;
+    }
     
     // view controllers are created lazily
     // in the meantime, load the array with placeholders which will be replaced on demand
@@ -57,6 +68,7 @@ static NSInteger kDelta = 0;
     
     // a page is the width of the scroll view
     self.scrlImages.pagingEnabled = YES;
+    self.scrlImages.delegate = self;
     self.scrlImages.contentSize =
     CGSizeMake((CONTENT_WIDTH + PAGE_PADDING)* numberPages
                , CGRectGetHeight(self.scrlImages.frame));
@@ -68,14 +80,15 @@ static NSInteger kDelta = 0;
         [subview removeFromSuperview];
     }
     
-    for (int i = 0; i < numberPages ; i++) {
-        [self loadScrollViewWithPage:i];
-    }
+    [self loadScrollViewWithPage:0];
+    [self loadScrollViewWithPage:1];
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)loadScrollViewWithPage:(NSUInteger)page
 {
-    if (page >= 3)
+    if (page >= numberPages)
         return;
     
     // replace the placeholder if necessary
@@ -91,8 +104,18 @@ static NSInteger kDelta = 0;
         singleImage = [[UIImageView alloc] initWithFrame:frame];
         [singleImage setContentMode:UIViewContentModeScaleAspectFill];
         [singleImage setClipsToBounds:YES];
-        [singleImage setImage:[UIImage imageNamed:
-                               [NSString stringWithFormat:@"%@%d.jpg", _strSpotName, page+1]]];
+        
+        if (![self.dicInfo objectForKey:@"XOLA"]) {
+            [singleImage setImage:[UIImage imageNamed:
+                                   [NSString stringWithFormat:@"%@%d.jpg", _strSpotName, page+1]]];
+        }
+        else {
+            NSDictionary *singleMedia = [[self.dicInfo objectForKey:@"photos"] objectAtIndex:page];
+            
+            [singleImage setImageWithURL:[NSURL URLWithString:[singleMedia objectForKey:@"src"]] placeholderImage:[UIImage imageNamed:@"loading.png"]];
+        }
+        
+        
         
         [self.arrImages replaceObjectAtIndex:page withObject:singleImage];
     }
@@ -125,5 +148,14 @@ static NSInteger kDelta = 0;
         [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
                        launchOptions:launchOptions];
     }}
+
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    // switch the indicator when more than 50% of the previous/next page is visible
+    NSUInteger page = floor(self.scrlImages.contentOffset.x / CONTENT_WIDTH);
+    
+    [self loadScrollViewWithPage:page + 1];
+}
 
 @end
